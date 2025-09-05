@@ -1,6 +1,7 @@
 import './App.css'
 import { useCounter } from './hooks/useCounter/useCounter.ts'
 import { useToggle } from './hooks/useToggle/useToggle.ts'
+import { useDocumentTitle } from './hooks/useDocumentTitle/useDocumentTitle.ts'
 
 function App() {
     const counter = useCounter(1, { max: 14, min: 0 })
@@ -10,7 +11,9 @@ function App() {
         'blue',
         'orange',
     ] as const)
-    console.log(state, 'state')
+
+    const [title, setTitle] = useDocumentTitle('Niveel')
+
     return (
         <>
             <p>
@@ -39,6 +42,12 @@ function App() {
             <button type="button" onClick={() => toggle('blue')}>
                 Toggle custom to blue
             </button>
+            <br />
+            <p>
+                Title: <code>{title}</code>
+            </p>
+
+            <input onChange={(e) => setTitle(e.target.value)} />
         </>
     )
 }
